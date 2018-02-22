@@ -1,1 +1,1 @@
-# [Live] (https://michalphs.github.io/todo)
+# [Live](https://michalphs.github.io/todo)
