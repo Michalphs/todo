@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To do list</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="left-content">
+                <div id="user-panel">
+                    <div class="avatar">
+                        <img src="https://i.imgur.com/p9fj5Wn.png" alt="Avatar" />
+                    </div>
+                    <div class="welcome">
+                        <span>Welcome</span>
+                        <br/>
+                        <span class="username">Gene Schaefer</span>
+                    </div>
+                </div>
+                <div id="lists-names">
+                   
+                    <div id="lists-container">
+                        <button class="btn-tab">
+                            <div class="name">To-Do Project</div>
+                            <div class="remaining"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content-container">
+                <div class="main-content">
+                    <header>
+                        <div class="list-name">
+                            <h1 class="list-name-title">To-Do Project</h1>
+                        </div>
+                        <div class="list-actions">
+                            <button class="button project-name-edit">Edit List</button>
+                            <a href="#" class="button red project-delete">Delete List</a>
+                        </div>
+                    </header>
+                    <div id="new-task">
+    
+                        <div id="new-task-form">
+                            <div>
+                                <input type="text" id="task-name" name="task-name" placeholder="Enter your new task..." />
+                            </div>
+                            <div>
+                                <button class="action-task-add button">Add Task</button>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div id="tasks-list-container">
+                        <ul id="tasks-list">
+                         
+                        </ul>
+                        <div id="tasks-list-actions">
+                            <button class="action-task-todo-delete button red">Delete To Do</button>
+                            <button class="action-task-read button">Read To Do</button>
+                            <button class="action-task-save button">Save To do</button>
+                            <button class="action-task-done button">Mark as Done</button>
+                            <button class="action-task-todo button">Mask as To Do</button>
+                            <button class="action-task-delete button red">Delete Selected</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
