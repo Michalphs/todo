@@ -3,10 +3,6 @@ const btnDeleteTask = document.querySelector('.action-task-delete');
 const btnMarkToDo = document.querySelector('.action-task-todo');
 const btnMarkDone = document.querySelector('.action-task-done');
 const btnProjectName = document.querySelector('.project-name-edit');
-const btnProjectDelete = document.querySelector('.project-delete');
-const btnSaveTodo = document.querySelector('.action-task-save');
-const btnDeleteTodo = document.querySelector('.action-task-todo-delete');
-const btnReadTodo = document.querySelector('.action-task-read');
 ///
 const leftPanelName = document.querySelector('.name');
 const headingName = document.querySelector('.list-name-title');
@@ -32,17 +28,16 @@ function createInput() {
     newInput.id = "project-name-input";
     newInput.setAttribute('type', 'text');
     newInput.setAttribute('placeholder', 'Enter your new name...');
+    headingName.textContent = '';
     headingName.appendChild(newInput);
+    
     return newInput;
 }
 
 function saveNewName() {
-
     const input = document.querySelector('#project-name-input');
-
-
     if (input.value !== '') {
-        headingName.removeChild.firstElementChild;
+       
         headingName.textContent = input.value;
         leftPanelName.textContent = input.value;
         input.style.borderColor = '#f2f2f2';
@@ -58,12 +53,6 @@ function createNewNameProject() {
         const button = createButton();
         button.addEventListener('click', saveNewName);
     }
-
-}
-
-function deleteProject() {
-    const panel = document.querySelector('#main-content');
-    panel.parentNode.removeChild(panel);
 }
 
 function addTask() {
@@ -89,8 +78,7 @@ function addTask() {
 function deleteChecked() {
     const checkInputs = document.querySelectorAll('.check-status:checked');
     checkInputs.forEach(el => {
-        const elem = el.querySelector('.status');
-        elem.parentNode.removeChild(elem);
+        el.parentNode.remove();
     });
     getRemainingTodosCount();
 }
@@ -117,93 +105,8 @@ function maskAsDone() {
     });
 }
 
-function saveTodoStorage() {
-    const todoName = document.querySelector('.list-name-title').textContent;
-    const todoRequest = document.querySelectorAll('.task-text');
-    const todoRequestStatuses = document.querySelectorAll('.status');
-    const todoRequestStatus = Array.from(todoRequestStatuses);
-    const todoRequestText = Array.from(todoRequest);
-    const myObj = {
-        todoName: todoName,
-    }
-
-    todoRequestStatus.forEach(element => {
-        const todoRequestsStatusText = todoRequestStatus.map(element => element.textContent);
-
-        myObj.todoRequestStatusText = todoRequestsStatusText;
-    });
-
-    todoRequestText.forEach(element => {
-        const todoRequestsTexts = todoRequestText.map(element => element.textContent);
-        myObj.todoRequestTexts = todoRequestsTexts;
-    });
-    const obStr = JSON.stringify(myObj);
-    localStorage.setItem('MyTodo', obStr);
-}
-
-function delteTodoStorage() {
-    localStorage.clear();
-}
-
-function readTodoStorage() {
-    if (localStorage.getItem('MyTodo') === null) {
-        alert('First save todo ;)');
-        return;
-    }
-    const storage = localStorage.getItem('MyTodo');
-    const myObj = JSON.parse(storage);
-    const todoName = document.querySelector('.list-name-title');
-    todoName.textContent = myObj.todoName;
-    leftPanelName.textContent = myObj.todoName;
-
-    const addTask = addTaskTodoStorage(myObj);
-}
-
-function addTaskTodoStorage(e) {
-    const tasksList = document.querySelector('#tasks-list');
-    const todoRequestTexts = e.todoRequestTexts;
-    const todoRequestStatusText = e.todoRequestStatusText;
-    todoRequestTexts.forEach(element => {
-        const createLi = document.createElement('li');
-        const createSpan = document.createElement('span');
-        const createInput = document.createElement('input');
-        
-
-        createLi.classList.add('tasks-list-item');
-
-        createInput.classList.add('check-status');
-        createInput.setAttribute('type', 'checkbox');
-
-        createSpan.classList.add('task-text');
-        createSpan.textContent = element;
-        getRemainingTodosCount();
-
-
-        tasksList.appendChild(createLi);
-        createLi.appendChild(createInput);
-        createLi.appendChild(createSpan);
-    });
-
-    const li = document.querySelectorAll('.tasks-list-item');
-
-    li.forEach((element, i) => {
-        const createStatus = document.createElement('div');
-        console.log(element);
-        todoRequestStatusText.forEach(el => {
-            createStatus.classList.add('status');
-            createStatus.textContent = el;
-            element.appendChild(createStatus);
-        });
-        
-    });
-}
-
 btnAddTask.addEventListener('click', addTask);
 btnDeleteTask.addEventListener('click', deleteChecked);
 btnMarkToDo.addEventListener('click', maskAsToDo);
 btnMarkDone.addEventListener('click', maskAsDone);
 btnProjectName.addEventListener('click', createNewNameProject);
-btnProjectDelete.addEventListener('click', deleteProject);
-btnSaveTodo.addEventListener('click', saveTodoStorage);
-btnDeleteTodo.addEventListener('click', delteTodoStorage);
-btnReadTodo.addEventListener('click', readTodoStorage);
